@@ -1,3 +1,4 @@
+import '../screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,9 +9,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CSG Shop',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.deepOrange,
+        fontFamily: 'Lato',
       ),
-      home: MyHomePage(),
+      home: ProductsOverviewScreen(),
     );
   }
 }
