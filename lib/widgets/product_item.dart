@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProductItem extends StatelessWidget {
   final String title;
+  final String id;
   final String imageUrl;
   final double price;
   bool? isFavourite;
@@ -10,6 +11,7 @@ class ProductItem extends StatelessWidget {
   ProductItem(
       {required this.title,
       required this.imageUrl,
+      required this.id,
       required this.price,
       this.isFavourite});
 
@@ -19,7 +21,7 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
           child: GestureDetector(
-            onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailScreen(title: title,)));},
+            onTap: (){Navigator.of(context).pushNamed(ProductDetailScreen.routeName, arguments: id);},
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,

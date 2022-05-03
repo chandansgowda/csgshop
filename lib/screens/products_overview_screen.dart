@@ -1,3 +1,5 @@
+import 'package:csgshop/widgets/products_grid.dart';
+
 import '../widgets/product_item.dart';
 import '../models/product.dart';
 import 'package:flutter/material.dart';
@@ -44,20 +46,9 @@ class ProductsOverviewScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("CSG Shop"),
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(10),
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                childAspectRatio: 3/2,
-                  crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-          itemCount: loadedProducts.length,
-          itemBuilder: (ctx, index) {
-          var product = loadedProducts[index];
-            return ProductItem(title: product.title.toString(), imageUrl: product.imageUrl.toString(), price: product.price);
-          }),
+      body: ProductsGrid(),
     );
   }
 }
+
+
