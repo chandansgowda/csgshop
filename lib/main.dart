@@ -1,3 +1,4 @@
+import 'package:csgshop/providers/cart.dart';
 import 'package:csgshop/providers/products.dart';
 import 'package:csgshop/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +11,11 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => Products()),
+        ChangeNotifierProvider(create: (ctx) =>  Cart()),
+      ],
       child: MaterialApp(
         title: 'CSG Shop',
         theme: ThemeData(
@@ -21,8 +25,8 @@ class MyApp extends StatelessWidget {
         ),
         home: ProductsOverviewScreen(),
         routes: {
-          ProductDetailScreen.routeName : (ctx) => ProductDetailScreen(),
-  },
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+        },
       ),
     );
   }
