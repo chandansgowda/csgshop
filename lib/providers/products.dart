@@ -1,4 +1,4 @@
-import 'package:csgshop/models/product.dart';
+import 'package:csgshop/providers/product.dart';
 import 'package:flutter/cupertino.dart';
 
 class Products with ChangeNotifier{
@@ -41,11 +41,15 @@ class Products with ChangeNotifier{
     return [..._items];
   }
 
+  List<Product> get favoriteItems{
+    return _items.where((element) => element.isFavourite==true).toList();
+  }
+
   Product findById(String id){
     return _items.firstWhere((element) => element.id == id);
   }
 
-  void ddProduct(){
+  void addProduct(){
     notifyListeners();
   }
 }

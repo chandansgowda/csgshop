@@ -1,10 +1,22 @@
 import 'package:csgshop/widgets/products_grid.dart';
 
 import '../widgets/product_item.dart';
-import '../models/product.dart';
+import '../providers/product.dart';
 import 'package:flutter/material.dart';
 
-class ProductsOverviewScreen extends StatelessWidget {
+enum FilterOptions{
+  Favorites,
+  All
+}
+
+class ProductsOverviewScreen extends StatefulWidget {
+  @override
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  var _showOnlyFavorites = false;
+
   List<Product> loadedProducts = [
     Product(
       id: 'p1',
@@ -45,10 +57,30 @@ class ProductsOverviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("CSG Shop"),
+        actions: [
+          PopupMenuButton(
+            onSelected: (FilterOptions value){
+              setState(() {
+                if (value==FilterOptions.Favorites) _showOnlyFavorites=true;
+                else _showOnlyFavorites=false;
+              });
+            },
+              child: Icon(Icons.menu),
+              itemBuilder: (_) {
+                return [
+                  PopupMenuItem(
+                    child: Text("Show favorites"),
+                    value: FilterOptions.Favorites,
+                  ),
+                  PopupMenuItem(
+                    child: Text("Show All"),
+                    value: FilterOptions.All,
+                  ),
+                ];
+              })
+        ],
       ),
-      body: ProductsGrid(),
+      body: ProductsGrid(_showOnlyFavorites),
     );
   }
 }
-
-
