@@ -1,4 +1,7 @@
+import 'package:csgshop/providers/cart.dart';
+import 'package:csgshop/widgets/badge.dart';
 import 'package:csgshop/widgets/products_grid.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/product_item.dart';
 import '../providers/product.dart';
@@ -54,6 +57,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("CSG Shop"),
@@ -77,7 +81,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                     value: FilterOptions.All,
                   ),
                 ];
-              })
+              }),
+          Badge(child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {  },), value: cart.itemCount.toString()),
         ],
       ),
       body: ProductsGrid(_showOnlyFavorites),
