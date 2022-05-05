@@ -1,5 +1,6 @@
 import 'package:csgshop/providers/cart.dart';
 import 'package:csgshop/providers/products.dart';
+import 'package:csgshop/screens/cart_screen.dart';
 import 'package:csgshop/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         home: ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen()
         },
       ),
     );

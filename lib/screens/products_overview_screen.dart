@@ -1,4 +1,5 @@
 import 'package:csgshop/providers/cart.dart';
+import 'package:csgshop/screens/cart_screen.dart';
 import 'package:csgshop/widgets/badge.dart';
 import 'package:csgshop/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
@@ -7,10 +8,7 @@ import '../widgets/product_item.dart';
 import '../providers/product.dart';
 import 'package:flutter/material.dart';
 
-enum FilterOptions{
-  Favorites,
-  All
-}
+enum FilterOptions { Favorites, All }
 
 class ProductsOverviewScreen extends StatefulWidget {
   @override
@@ -63,12 +61,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         title: Text("CSG Shop"),
         actions: [
           PopupMenuButton(
-            onSelected: (FilterOptions value){
-              setState(() {
-                if (value==FilterOptions.Favorites) _showOnlyFavorites=true;
-                else _showOnlyFavorites=false;
-              });
-            },
+              onSelected: (FilterOptions value) {
+                setState(() {
+                  if (value == FilterOptions.Favorites)
+                    _showOnlyFavorites = true;
+                  else
+                    _showOnlyFavorites = false;
+                });
+              },
               child: Icon(Icons.menu),
               itemBuilder: (_) {
                 return [
@@ -82,7 +82,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   ),
                 ];
               }),
-          Badge(child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {  },), value: cart.itemCount.toString()),
+          Badge(
+              child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
+              ),
+              value: cart.itemCount.toString()),
         ],
       ),
       body: ProductsGrid(_showOnlyFavorites),
