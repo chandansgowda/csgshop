@@ -4,7 +4,7 @@ import 'package:csgshop/widgets/badge.dart';
 import 'package:csgshop/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/product_item.dart';
+
 import '../providers/product.dart';
 import 'package:flutter/material.dart';
 
