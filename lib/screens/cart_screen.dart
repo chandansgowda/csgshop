@@ -48,18 +48,20 @@ class CartScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Expanded(
+          if (cart.items.length>0 ) Expanded(
             child: ListView.builder(
                 itemCount: cart.items.length,
                 itemBuilder: (ctx, index) {
                   var i = cart.items.values.toList()[index];
                   return CartItem(
                       id: i.id,
+                      productId: cart.items.keys.toList()[index],
                       title: i.title,
                       price: i.price,
                       quantity: i.quantity);
                 }),
           )
+          else Text("No Items in Cart")
         ],
       ),
     );
