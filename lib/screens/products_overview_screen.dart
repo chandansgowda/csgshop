@@ -1,5 +1,6 @@
 import 'package:csgshop/providers/cart.dart';
 import 'package:csgshop/screens/cart_screen.dart';
+import 'package:csgshop/widgets/app_drawer.dart';
 import 'package:csgshop/widgets/badge.dart';
 import 'package:csgshop/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                     _showOnlyFavorites = false;
                 });
               },
-              child: Icon(Icons.menu),
+              child: Icon(Icons.menu_open_sharp),
               itemBuilder: (_) {
                 return [
                   PopupMenuItem(
@@ -93,6 +94,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       body: ProductsGrid(_showOnlyFavorites),
+      drawer: MainDrawer(),
     );
   }
 }

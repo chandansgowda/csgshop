@@ -1,6 +1,8 @@
 import 'package:csgshop/providers/cart.dart';
+import 'package:csgshop/providers/orders.dart';
 import 'package:csgshop/providers/products.dart';
 import 'package:csgshop/screens/cart_screen.dart';
+import 'package:csgshop/screens/orders_screen.dart';
 import 'package:csgshop/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) => Products()),
         ChangeNotifierProvider(create: (ctx) =>  Cart()),
+        ChangeNotifierProvider(create: (ctx) =>  Orders()),
       ],
       child: MaterialApp(
         title: 'CSG Shop',
@@ -27,7 +30,8 @@ class MyApp extends StatelessWidget {
         home: ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          CartScreen.routeName: (ctx) => CartScreen()
+          CartScreen.routeName: (ctx) => CartScreen(),
+          OrdersScreen.routeName: (ctx) => OrdersScreen()
         },
       ),
     );
