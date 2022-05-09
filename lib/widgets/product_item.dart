@@ -21,7 +21,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
-    final cart = Provider.of<Cart>(context,listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -38,7 +38,7 @@ class ProductItem extends StatelessWidget {
           footer: GridTileBar(
             leading: IconButton(
               icon: Icon(
-                product.isFavourite!?Icons.favorite:Icons.favorite_border,
+                product.isFavourite! ? Icons.favorite : Icons.favorite_border,
                 color: Theme.of(context).accentColor,
               ),
               onPressed: () {
@@ -52,6 +52,13 @@ class ProductItem extends StatelessWidget {
                   color: Theme.of(context).accentColor),
               onPressed: () {
                 cart.addItem(product.id, product.price, product.title);
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Added item to cart !"),
+                    duration: Duration(seconds: 2),
+                    action: SnackBarAction(label: "UNDO", onPressed: () => cart.removeItem(product.id)),
+                  ),
+                );
               },
             ),
           )),
