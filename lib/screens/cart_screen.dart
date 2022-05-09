@@ -38,8 +38,16 @@ class CartScreen extends StatelessWidget {
                   ),
                   FlatButton(
                       onPressed: () {
-                        Provider.of<Orders>(context, listen: false).addOrder(cart.items.values.toList(), cart.totalAmount);
-                        cart.clear();
+                        if (cart.items.isNotEmpty) {
+                          Provider.of<Orders>(context, listen: false).addOrder(
+                              cart.items.values.toList(), cart.totalAmount);
+                          cart.clear();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("No items in cart!"),
+                            duration: Duration(seconds: 2),
+                          ));
+                        }
                       },
                       child: Text(
                         "ORDER NOW",
@@ -52,20 +60,22 @@ class CartScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          if (cart.items.length>0 ) Expanded(
-            child: ListView.builder(
-                itemCount: cart.items.length,
-                itemBuilder: (ctx, index) {
-                  var i = cart.items.values.toList()[index];
-                  return CartItem(
-                      id: i.id,
-                      productId: cart.items.keys.toList()[index],
-                      title: i.title,
-                      price: i.price,
-                      quantity: i.quantity);
-                }),
-          )
-          else Text("No Items in Cart")
+          if (cart.items.length > 0)
+            Expanded(
+              child: ListView.builder(
+                  itemCount: cart.items.length,
+                  itemBuilder: (ctx, index) {
+                    var i = cart.items.values.toList()[index];
+                    return CartItem(
+                        id: i.id,
+                        productId: cart.items.keys.toList()[index],
+                        title: i.title,
+                        price: i.price,
+                        quantity: i.quantity);
+                  }),
+            )
+          else
+            Text("No Items in Cart")
         ],
       ),
     );
