@@ -1,12 +1,16 @@
+import 'package:csgshop/providers/products.dart';
+import 'package:csgshop/screens/edit_product_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserProductItem extends StatelessWidget {
-  final String title, imageUrl;
+  final String id, title, imageUrl;
 
-  UserProductItem({
-   required this.title,
-   required this.imageUrl
-});
+  UserProductItem(
+   this.id,
+   this.title,
+   this.imageUrl
+);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,8 @@ class UserProductItem extends StatelessWidget {
         width: 100,
         child: Row(
           children: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,)),
-            IconButton(onPressed: (){}, icon: Icon(Icons.delete, color: Theme.of(context).errorColor,)),
+            IconButton(onPressed: (){ Navigator.of(context).pushNamed(EditProductScreen.routeName, arguments: id);}, icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,)),
+            IconButton(onPressed: (){Provider.of<Products>(context, listen: false).deleteProduct(id);}, icon: Icon(Icons.delete, color: Theme.of(context).errorColor,)),
           ],
         ),
       ),
