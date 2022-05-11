@@ -52,15 +52,30 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  void addProduct(Product newProduct) {
-    final url = Uri.parse("https://practice-66cd5-default-rtdb.firebaseio.com/products.json");
-    http.post(
+  Future<void> addProduct(Product newProduct) {
+    final url = Uri.parse(
+        "https://practice-66cd5-default-rtdb.firebaseio.com/products.json");
+    return http
+        .post(
       url,
-      body: json
-          .encode({'title': newProduct.title, 'price': newProduct.price, 'description': newProduct.description, 'imageUrl': newProduct.imageUrl, }),
-    );
-    _items.add(newProduct);
-    notifyListeners();
+      body: json.encode({
+        'title': newProduct.title,
+        'price': newProduct.price,
+        'description': newProduct.description,
+        'imageUrl': newProduct.imageUrl,
+        "isFavourite": newProduct.isFavourite
+      }),
+    )
+        .then((response) {
+      final newProductWithId = Product(
+          title: newProduct.title,
+          id: json.decode(response.body)['name'],
+          description: newProduct.description,
+          price: newProduct.price,
+          imageUrl: newProduct.imageUrl);
+      _items.add(newProductWithId);
+      notifyListeners();
+    });
   }
 
   void updateProduct(String id, Product newProduct) {
